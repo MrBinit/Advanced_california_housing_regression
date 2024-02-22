@@ -1,0 +1,7 @@
+In this dataset, I have used the robust Scaler as in my dataset their already existed outliers and robut scaler are less sensitive to outliers. During the model selection, I have used multiple regression models like RandomforestRegression, Support Vector Regressor, ADABoost regressor, XGB regessor, lasso and ridge regessor. Among these models. RMSE for AdaBoost: 0.3967012428432139
+RMSE for Random Forest: 0.34023293564572443
+RMSE for SVR: 0.33544812055639334
+RMSE for XGB: 0.3507161651092244
+
+Among which Randomforestregressor was performing better. Then I used both GridSearchCV and RandomSearchCV. RandomSearchCVBest recommended this parameters. Hyperparameters: {'n_estimators': 100, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': False}
+RMSE after tuning with RandomizedSearchCV: 0.342I have used the stacking with base model Randomforestregressor, SVR, ADABOOST, Lasso and  ridge regressor and final estimator as ridge after trying all 4 models as ridge regression had high accuracy. 
