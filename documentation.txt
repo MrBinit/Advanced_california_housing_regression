@@ -5,3 +5,8 @@ RMSE for XGB: 0.3507161651092244
 
 Among which Randomforestregressor was performing better. Then I used both GridSearchCV and RandomSearchCV. RandomSearchCVBest recommended this parameters. Hyperparameters: {'n_estimators': 100, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': 10, 'bootstrap': False}
 RMSE after tuning with RandomizedSearchCV: 0.342I have used the stacking with base model Randomforestregressor, SVR, ADABOOST, Lasso and  ridge regressor and final estimator as ridge after trying all 4 models as ridge regression had high accuracy. 
+
+
+
+
+In stacking I had used grid searchCV with multiple parameters of base model and the final model which didnt perform better than the stacking model I used previously. So, I decided not to use the best_estimator given by GridSearchCV. 
