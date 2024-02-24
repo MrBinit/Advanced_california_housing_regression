@@ -10,3 +10,5 @@ RMSE after tuning with RandomizedSearchCV: 0.342I have used the stacking with ba
 
 
 In stacking I had used grid searchCV with multiple parameters of base model and the final model which didnt perform better than the stacking model I used previously. So, I decided not to use the best_estimator given by GridSearchCV. 
+
+the features that I got is 'OverallQual', 'YearBuilt', 'TotalBsmtSF', 'GrLivArea', 'GarageArea' from RFE. 
