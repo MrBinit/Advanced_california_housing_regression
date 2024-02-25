@@ -1,41 +1,36 @@
-import json
-from flask import Flask, render_template, request, app, jsonify, url_for, Request
 import pickle
 import numpy as np
-import pandas as pd
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
+# Load the trained model and scaler objects
 model = pickle.load(open('stacking_regressor_model.pkl', 'rb'))
-scalar = pickle.load(open('scaling.pkl', 'rb'))
+scaler = pickle.load(open('scaling.pkl', 'rb'))
 
 @app.route("/")
 def home():
     return render_template('index.html')
 
-
-# @app.route('/predict', methods = ['POST'])
-# def predict_placement():
-#     Overall_quality = request.form.get('OverallQuality')
-#     Year_built = request.form.get('YearBuilt')
-#     Total_Basement = request.form.get('TotalBasement')
-#     Garden_Area = request.form.get('GardenArea')
-#     Garage_Area = request.form.get('GarageArea"')
-
-#     #prediction 
-#     result = model.predict(np.array([Overall_quality,Year_built, Total_Basement, Garden_Area, Garage_Area]).reshape(1,5))
-#     return result
-
-@app.route('/predict_api', methods = ['POST'])
-def predict_api():
-    data = request.json['data']
-    print(np.array(list(data.values())).reshape(1, -1))
-    new_data = scalar.transform(np.array(list(data.values())).reshape(1, -1))
-    output = model.predict(new_data)
-    print(output[0])
-    return jsonify(output[0])
-
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Extract input data from the form
+    data = [float(x) for x in request.form.values()]
+    
+    # Apply scaling to the input data
+    scaled_data = scaler.transform(np.array(data).reshape(1, -1))
+    
+    # Make predictions using the model
+    predictions = model.predict(scaled_data)
+    
+    # Inverse transform the predictions to the original scale
+    inverse_predictions = np.exp(predictions)
+    
+    # Format the predictions as dollars
+    formatted_predictions = ['${:,.2f}'.format(pred * 1000) for pred in inverse_predictions]
+    
+    # Render the template with the prediction text
+    return render_template("index.html", prediction_text="Predicted house prices: {}".format(", ".join(formatted_predictions)))
 
 if __name__ == "__main__":
-    app.run(debug= True)
-
+    app.run(debug=True)

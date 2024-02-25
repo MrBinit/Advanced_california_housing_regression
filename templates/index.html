@@ -44,6 +44,11 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .prediction {
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(2, 0, 128); /* Change color as desired */
+        }
     </style>
     <script>
         function validateInput(event) {
@@ -56,9 +61,12 @@
 </head>
 <body>
 
-    <h1>California Housing Prediction</h1>
-    <form method="post" action="/predict">
-        <!-- <label for="OverallQuality">Overall Quality</label><br>
+<h1>California Housing Prediction</h1>
+<form method="post" action="{{ url_for('predict')}}">
+    <!-- <label for="OverallQuality">OverallQuality</label><br>
+    <input type="text" id="OverallQuality" name="OverallQuality" onkeypress="validateInput(event)" required><br> -->
+    
+        <label for="OverallQuality">Overall Quality</label><br>
         <select id="OverallQuality" name="OverallQuality">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -70,26 +78,29 @@
             <option value="8">8</option>
             <option value="9">9</option>
             <option value="10">10</option>
-        </select><br> -->
+        </select><br>
 
+    <label for="YearBuilt">Year Built</label><br>
+    <input type="text" id="YearBuilt" name="YearBuilt" onkeypress="validateInput(event)" required><br>
 
-        <label for="YearBuilt">OverallQuality</label><br>
-        <input type="text" id="OverallQuality" name="OverallQuality" onkeypress="validateInput(event)" required><br>
+    <label for="TotalBasement">Total Basement in Square Foot</label><br>
+    <input type="text" id="TotalBasement" name="TotalBasement" onkeypress="validateInput(event)" required><br>
 
-        <label for="YearBuilt">Year Built</label><br>
-        <input type="text" id="YearBuilt" name="YearBuilt" onkeypress="validateInput(event)" required><br>
+    <label for="GardenArea">Garden Area</label><br>
+    <input type="text" id="GardenArea" name="GardenArea" onkeypress="validateInput(event)" required><br>
 
-        <label for="TotalBasement">Total Basement in Square Foot</label><br>
-        <input type="text" id="TotalBasement" name="TotalBasement" onkeypress="validateInput(event)" required><br>
+    <label for="GarageArea">Garage Area</label><br>
+    <input type="text" id="GarageArea" name="GarageArea" onkeypress="validateInput(event)" required><br>
 
-        <label for="GardenArea">Garden Area</label><br>
-        <input type="text" id="GardenArea" name="GardenArea" onkeypress="validateInput(event)" required><br>
+    <input type="submit" value="Predict">
+</form>
 
-        <label for="GarageArea">Garage Area</label><br>
-        <input type="text" id="GarageArea" name="GarageArea" onkeypress="validateInput(event)" required><br>
+<br>
+<br>
 
-        <input type="submit" value="Predict">
-    </form>
+<!-- Apply the 'prediction' class to decorate the prediction text -->
+<p class="prediction">{{ prediction_text }}</p>
 
 </body>
 </html>
+
