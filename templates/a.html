@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Housing Prediction</title>
+</head>
+<body>
+    <h1>California Housing Prediction</h1>
+    
+    <h2>Enter Variables</h2>
+    <table>
+        <tr>
+            <td><label for="OverallQual">Overall Quality:</label></td>
+            <td>
+                <select id="OverallQual" name="OverallQual">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="YearBuilt">Year Built:</label></td>
+            <td><input type="text" id="YearBuilt" name="YearBuilt" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></td>
+        </tr>
+        <tr>
+            <td><label for="TotalBsmtSF">Total Basement SF:</label></td>
+            <td><input type="text" id="TotalBsmtSF" name="TotalBsmtSF" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></td>
+        </tr>
+        <tr>
+            <td><label for="GrLivArea">Gr Liv Area:</label></td>
+            <td><input type="text" id="GrLivArea" name="GrLivArea" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></td>
+        </tr>
+        <tr>
+            <td><label for="GarageArea">Garage Area:</label></td>
+            <td><input type="text" id="GarageArea" name="GarageArea" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></td>
+        </tr>
+    </table>
+    
+    <button onclick="predict()">Predict</button>
+
+    <div id="predictionResult"></div>
+
+    <script>
+        function predict() {
+            var overallQuality = document.getElementById("OverallQual").value;
+            var yearBuilt = document.getElementById("YearBuilt").value;
+            var totalBsmtSF = document.getElementById("TotalBsmtSF").value;
+            var grLivArea = document.getElementById("GrLivArea").value;
+            var garageArea = document.getElementById("GarageArea").value;
+
+            // You can use these variables for further processing or validation
+
+            // Display "wow"
+            document.getElementById("predictionResult").innerText = "wow";
+        }
+    </script>
+</body>
+</html>
