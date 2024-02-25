@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Housing Prediction</title>
+</head>
+<body>
+    <h1>California Housing Prediction</h1>
+    
+    <h2>Enter Variables</h2>
+    <table>
+        <tr>
+            <td><label for="OverallQual">Overall Quality:</label></td>
+            <td><input type="number" id="OverallQual" name="OverallQual"></td>
+        </tr>
+        <tr>
+            <td><label for="YearBuilt">Year Built:</label></td>
+            <td><input type="number" id="YearBuilt" name="YearBuilt"></td>
+        </tr>
+        <tr>
+            <td><label for="TotalBsmtSF">Total Basement SF:</label></td>
+            <td><input type="number" id="TotalBsmtSF" name="TotalBsmtSF"></td>
+        </tr>
+        <tr>
+            <td><label for="GrLivArea">Gr Liv Area:</label></td>
+            <td><input type="number" id="GrLivArea" name="GrLivArea"></td>
+        </tr>
+        <tr>
+            <td><label for="GarageArea">Garage Area:</label></td>
+            <td><input type="number" id="GarageArea" name="GarageArea"></td>
+        </tr>
+    </table>
+    
+    <button onclick="predict()">Predict</button>
+
+    <script>
+        function predict() {
+            // JavaScript code to gather entered data and send it to your backend for prediction
+            var overallQual = document.getElementById("OverallQual").value;
+            var yearBuilt = document.getElementById("YearBuilt").value;
+            var totalBsmtSF = document.getElementById("TotalBsmtSF").value;
+            var grLivArea = document.getElementById("GrLivArea").value;
+            var garageArea = document.getElementById("GarageArea").value;
+
+            // Example of sending the data using fetch to a Flask backend
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    OverallQual: overallQual,
+                    YearBuilt: yearBuilt,
+                    TotalBsmtSF: totalBsmtSF,
+                    GrLivArea: grLivArea,
+                    GarageArea: garageArea
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the prediction result returned from the backend
+                console.log(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
